@@ -57,4 +57,17 @@ public class GameScoreServiceTest {
         // then
         assertThat(false, is(optionalWinner.isPresent()));
     }
+
+    @Test
+    public void should_return_advantage_player_when_he_scores() {
+        // given
+        GameScore playerOneScore = GameScore.ADVANTEGE;
+        GameScore playerTwoScore = GameScore.FORTY;
+        Player playerWhoScored = Player.PLAYER_ONE;
+        // when
+        Optional<Player> optionalWinner = gameWinner(playerOneScore, playerTwoScore, playerWhoScored);
+        // then
+        assertThat(true, is(optionalWinner.isPresent()));
+        assertThat(optionalWinner.isPresent(), is(Player.PLAYER_ONE));
+    }
 }

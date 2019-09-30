@@ -22,4 +22,8 @@ public class GameScoreService {
             return true;
         return false;
     }
+
+    public static Optional<Player> gameWinner(GameScore playerOneScore, GameScore playerTwoScore, Player playerWhoScored) {
+        return Optional.empty();
+    }
 }
