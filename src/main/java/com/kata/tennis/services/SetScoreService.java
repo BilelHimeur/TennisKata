@@ -24,6 +24,8 @@ public class SetScoreService {
     }
 
     public static boolean isSetScoreTieBreak(int playerOneScore, int playerTwoScore) {
+        if (playerOneScore == playerTwoScore && playerOneScore == 6)
+            return true;
         return false;
     }
     }
