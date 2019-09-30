@@ -20,4 +20,16 @@ public class MatchScoreServiceTest {
         // then
         assertThat(maybeWinner.isPresent(), is(false));
     }
+
+    @Test
+    public void should_return_player_who_has_three_sets_won_first() {
+        // given
+        int playerOneSetScore = 2;
+        int playerTwoSetScore = 3;
+        // when
+        Optional maybeWinner = matchWinner(playerOneSetScore, playerTwoSetScore);
+        // then
+        assertThat(maybeWinner.isPresent(), is(true));
+        assertThat(maybeWinner.get(), is(playerTwoSetScore));
+    }
 }
