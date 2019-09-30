@@ -36,6 +36,8 @@ public class GameScoreService {
     }
 
     public static Optional<Player> tieBreakWinner(int playerOneScore, int playerTwoScore) {
+        if (playerOneScore < 7 && playerTwoScore < 7)
+            return Optional.empty();
         return Optional.empty();
     }
 }
