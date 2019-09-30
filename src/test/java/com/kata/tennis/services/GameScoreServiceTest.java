@@ -68,6 +68,6 @@ public class GameScoreServiceTest {
         Optional<Player> optionalWinner = gameWinner(playerOneScore, playerTwoScore, playerWhoScored);
         // then
         assertThat(true, is(optionalWinner.isPresent()));
-        assertThat(optionalWinner.isPresent(), is(Player.PLAYER_ONE));
+        assertThat(optionalWinner.get(), is(Player.PLAYER_ONE));
     }
 }
