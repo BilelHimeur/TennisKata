@@ -72,7 +72,7 @@ public class GameScoreServiceTest {
     }
 
     @Test
-    public void should_return_empty_when_both_players() {
+    public void should_return_empty_when_both_players_did_not_reach_7() {
         // given
         int playerOneScore = 5;
         int playerTwoScore = 3;
@@ -80,5 +80,18 @@ public class GameScoreServiceTest {
         Optional<Player> optionalWinner = tieBreakWinner(playerOneScore, playerTwoScore);
         // then
         assertThat(optionalWinner, equalTo(Optional.empty()));
+    }
+
+    @Test
+    public void should_return_player_with_at_least_7_points_within_2_more_than_opponent() {
+        // given
+        int playerOneScore = 8;
+        int playerTwoScore = 6;
+        Player Winner = Player.PLAYER_ONE;
+        // when
+        Optional<Player> optionalWinner = tieBreakWinner(playerOneScore, playerTwoScore);
+        // then
+        assertThat(optionalWinner.isPresent(), is(true));
+        assertThat(optionalWinner, equalTo(Winner));
     }
 }
