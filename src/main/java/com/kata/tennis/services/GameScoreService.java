@@ -13,4 +13,7 @@ public class GameScoreService {
             return Optional.of(Player.PLAYER_TWO);
         return Optional.empty();
     }
+    public static boolean isDeuce(GameScore playerOneScore, GameScore playerTwoScore) {
+        return false;
+    }
 }
