@@ -25,13 +25,17 @@ public class GameScoreService {
 
     public static Optional<Player> gameWinner(GameScore playerOneScore, GameScore playerTwoScore, Player playerWhoScored) {
         if (playerWhoScored == null) {
-            gameWinner(playerOneScore, playerTwoScore);
+            return gameWinner(playerOneScore, playerTwoScore);
         } else {
             if (GameScore.ADVANTEGE.equals(playerOneScore) && Player.PLAYER_ONE.equals(playerWhoScored))
                 return Optional.of(Player.PLAYER_ONE);
             if (GameScore.ADVANTEGE.equals(playerTwoScore) && Player.PLAYER_TWO.equals(playerWhoScored))
                 return Optional.of(Player.PLAYER_TWO);
         }
+        return Optional.empty();
+    }
+
+    public static Optional<Player> tieBreakWinner(int playerOneScore, int playerTwoScore) {
         return Optional.empty();
     }
 }

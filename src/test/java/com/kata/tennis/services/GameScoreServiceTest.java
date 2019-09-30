@@ -6,8 +6,8 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static com.kata.tennis.services.GameScoreService.gameWinner;
-import static com.kata.tennis.services.GameScoreService.isDeuce;
+import static com.kata.tennis.services.GameScoreService.*;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -69,5 +69,16 @@ public class GameScoreServiceTest {
         // then
         assertThat(true, is(optionalWinner.isPresent()));
         assertThat(optionalWinner.get(), is(Player.PLAYER_ONE));
+    }
+
+    @Test
+    public void should_return_empty_when_both_players() {
+        // given
+        int playerOneScore = 5;
+        int playerTwoScore = 3;
+        // when
+        Optional<Player> optionalWinner = tieBreakWinner(playerOneScore, playerTwoScore);
+        // then
+        assertThat(optionalWinner, equalTo(Optional.empty()));
     }
 }
