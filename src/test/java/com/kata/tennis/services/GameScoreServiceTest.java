@@ -46,4 +46,15 @@ public class GameScoreServiceTest {
         // then
         assertThat(false, is(optionalWinner.isPresent()));
     }
+
+    @Test
+    public void should_return_empty_when_both_players_score_is_forty() {
+        // given
+        GameScore playerOneScore = GameScore.FORTY;
+        GameScore playerTwoScore = GameScore.FORTY;
+        // when
+        Optional<Player> optionalWinner = gameWinner(playerOneScore, playerTwoScore);
+        // then
+        assertThat(false, is(optionalWinner.isPresent()));
+    }
 }
