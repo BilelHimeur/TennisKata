@@ -35,4 +35,15 @@ public class GameScoreServiceTest {
         // then
         assertThat(true, is(isDeuce));
     }
+
+    @Test
+    public void should_return_empty_when_both_players_score_less_forty() {
+        // given
+        GameScore playerOneScore = GameScore.FIFTEEN;
+        GameScore playerTwoScore = GameScore.ZERO;
+        // when
+        Optional<Player> optionalWinner = gameWinner(playerOneScore, playerTwoScore);
+        // then
+        assertThat(false, is(optionalWinner.isPresent()));
+    }
 }
