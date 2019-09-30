@@ -1,5 +1,6 @@
 package com.kata.tennis.services;
 
+import com.kata.tennis.model.Player;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -26,10 +27,11 @@ public class MatchScoreServiceTest {
         // given
         int playerOneSetScore = 2;
         int playerTwoSetScore = 3;
+        Player winner = Player.PLAYER_TWO;
         // when
         Optional maybeWinner = matchWinner(playerOneSetScore, playerTwoSetScore);
         // then
         assertThat(maybeWinner.isPresent(), is(true));
-        assertThat(maybeWinner.get(), is(playerTwoSetScore));
+        assertThat(maybeWinner.get(), is(winner));
     }
 }
