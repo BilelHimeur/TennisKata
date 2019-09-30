@@ -1,13 +1,13 @@
 package com.kata.tennis.services;
 
-import com.kata.tennis.model.Player;
+import com.kata.tennis.model.MatchStatus;
 import org.junit.Test;
 
 import java.util.Optional;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 import static com.kata.tennis.services.MatchScoreService.matchWinner;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class MatchScoreServiceTest {
 
@@ -27,7 +27,7 @@ public class MatchScoreServiceTest {
         // given
         int playerOneSetScore = 2;
         int playerTwoSetScore = 3;
-        Player winner = Player.PLAYER_TWO;
+        MatchStatus winner = MatchStatus.PLAYER_TWO_WINS;
         // when
         Optional maybeWinner = matchWinner(playerOneSetScore, playerTwoSetScore);
         // then
