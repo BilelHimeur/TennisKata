@@ -92,6 +92,6 @@ public class GameScoreServiceTest {
         Optional<Player> optionalWinner = tieBreakWinner(playerOneScore, playerTwoScore);
         // then
         assertThat(optionalWinner.isPresent(), is(true));
-        assertThat(optionalWinner, equalTo(Winner));
+        assertThat(optionalWinner.get(), equalTo(Winner));
     }
 }

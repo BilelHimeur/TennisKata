@@ -42,9 +42,9 @@ public class GameScoreService {
         if (playerOneScore < 7 && playerTwoScore < 7) {
             return Optional.empty();
         } else {
-            if (playerOneScore > playerTwoScore && pointDifference > 2)
+            if (playerOneScore > playerTwoScore && pointDifference >= 2)
                 return Optional.of(Player.PLAYER_ONE);
-            if (playerTwoScore > playerOneScore && pointDifference > 2)
+            if (playerTwoScore > playerOneScore && pointDifference >= 2)
                 return Optional.of(Player.PLAYER_TWO);
             return Optional.empty();
         }
