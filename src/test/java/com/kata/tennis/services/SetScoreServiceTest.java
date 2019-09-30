@@ -47,4 +47,17 @@ public class SetScoreServiceTest {
         // then
         assertThat(isTieBreak, is(true));
     }
+
+    @Test
+    public void should_return_winner_of_tie_break_as_set_winner() {
+        // given
+        int playerOneTieBreakScore = 13;
+        int playerTwoTieBreakScore = 15;
+        Player winner = Player.PLAYER_TWO;
+        // when
+        Optional maybeWinner = setWinner(playerOneTieBreakScore, playerTwoTieBreakScore);
+        // then
+        assertThat(maybeWinner.isPresent(), is(true));
+        assertThat(maybeWinner.get(), is(winner));
+    }
 }
