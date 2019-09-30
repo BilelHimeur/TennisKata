@@ -4,6 +4,8 @@ import com.kata.tennis.model.Player;
 import org.junit.Test;
 
 import java.util.Optional;
+
+import static com.kata.tennis.services.SetScoreService.isSetScoreTieBreak;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -33,5 +35,16 @@ public class SetScoreServiceTest {
         // then
         assertThat(maybeWinner.isPresent(), is(true));
         assertThat(maybeWinner.get(), is(winner));
+    }
+
+    @Test
+    public void should_return_true_if_tie_break_of_set_score() {
+        // given
+        int playerOneScore = 6;
+        int playerTwoScore = 6;
+        // when
+        boolean isTieBreak = isSetScoreTieBreak(playerOneScore, playerTwoScore);
+        // then
+        assertThat(isTieBreak, is(true));
     }
 }

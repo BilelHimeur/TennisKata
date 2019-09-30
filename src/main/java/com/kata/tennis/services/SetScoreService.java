@@ -22,4 +22,8 @@ public class SetScoreService {
         }
         return Optional.empty();
     }
+
+    public static boolean isSetScoreTieBreak(int playerOneScore, int playerTwoScore) {
+        return false;
+    }
     }
