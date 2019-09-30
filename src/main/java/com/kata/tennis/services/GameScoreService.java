@@ -5,6 +5,8 @@ import com.kata.tennis.model.Player;
 
 import java.util.Optional;
 
+import static java.lang.StrictMath.abs;
+
 public class GameScoreService {
     public static Optional<Player> gameWinner(GameScore playerOneScore, GameScore playerTwoScore) {
         if (isDeuce(playerOneScore, playerTwoScore))
@@ -36,8 +38,15 @@ public class GameScoreService {
     }
 
     public static Optional<Player> tieBreakWinner(int playerOneScore, int playerTwoScore) {
-        if (playerOneScore < 7 && playerTwoScore < 7)
+        int pointDifference = abs(playerOneScore - playerTwoScore);
+        if (playerOneScore < 7 && playerTwoScore < 7) {
             return Optional.empty();
-        return Optional.empty();
+        } else {
+            if (playerOneScore > playerTwoScore && pointDifference > 2)
+                return Optional.of(Player.PLAYER_ONE);
+            if (playerTwoScore > playerOneScore && pointDifference > 2)
+                return Optional.of(Player.PLAYER_TWO);
+            return Optional.empty();
+        }
     }
 }
