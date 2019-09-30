@@ -4,12 +4,16 @@ import com.kata.tennis.model.Player;
 
 import java.util.Optional;
 
+import static com.kata.tennis.services.GameScoreService.tieBreakWinner;
 import static java.lang.Math.abs;
 
 public class SetScoreService {
 
     public static Optional<Player> setWinner(int playerOneScore, int playerTwoScore) {
         int setScoreDifference = abs(playerOneScore - playerTwoScore);
+        if (isSetScoreTieBreak(playerOneScore, playerTwoScore)) {
+            return tieBreakWinner(playerOneScore, playerTwoScore);
+        }
         if (playerOneScore < 6 && playerTwoScore < 6) {
             return Optional.empty();
         } else {
