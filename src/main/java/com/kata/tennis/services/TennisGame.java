@@ -27,4 +27,14 @@ public class TennisGame {
         tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
         return tennisGameCurrentStatus;
     }
+
+    public ScoreHolder getCurrentSetScore() {
+        if (this.setsScore.size() != 0)
+            return this.setsScore.get(this.setsScore.size() - 1);
+        return new ScoreHolder(0, 0);
+    }
+
+    public void setCurrentSetScore(ScoreHolder currentSetScore){
+        this.setsScore.add(currentSetScore);
+    }
 }
