@@ -41,13 +41,28 @@ public class TennisGame {
                 tennisGameCurrentStatus.setCurrentMatchScore(MatchScoreService.
                         score(tennisGameCurrentStatus.getCurrentMatchScore().getPlayerOneScore(),
                                 tennisGameCurrentStatus.getCurrentMatchScore().getPlayerTwoScore(), playerWhoScored));
+                tennisGameCurrentStatus.setCurrentSetScore(new ScoreHolder(0, 0));
             }
         } else {
+
+            if (GameScoreService.tieBreakWinner(
+                    tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore(),
+                    tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore()).isPresent()) {
+                tennisGameCurrentStatus.setCurrentMatchScore(MatchScoreService.
+                        score(tennisGameCurrentStatus.getCurrentMatchScore().getPlayerOneScore(),
+                                tennisGameCurrentStatus.getCurrentMatchScore().getPlayerTwoScore(), playerWhoScored));
+                tennisGameCurrentStatus.setCurrentGameScore(new ScoreHolder(0, 0));
+                tennisGameCurrentStatus.setCurrentSetScore(new ScoreHolder(0, 0));
+
+            } else {
                 ScoreHolder scoreHolder = GameScoreService.tiebreakScore(
                         tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore(),
                         tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore(),
-                        playerWhoScored);
+                        playerWhoScored
+                );
                 tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
+            }
+
         }
         return tennisGameCurrentStatus;
     }

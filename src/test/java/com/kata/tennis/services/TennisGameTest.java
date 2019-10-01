@@ -52,7 +52,7 @@ public class TennisGameTest {
         TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
-        //assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
+        assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(1, 0)));
     }
 
@@ -82,6 +82,6 @@ public class TennisGameTest {
         // when
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
-        assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(2, 0)));
+        assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(2, 1)));
     }
 }
