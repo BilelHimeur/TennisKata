@@ -17,7 +17,7 @@ public class GameScoreServiceTest {
     public void should_return_the_player_with_the_score_forty() {
         // given
         GameScore playerOneScore = GameScore.FORTY;
-        GameScore playerTwoScore = GameScore.ZERO;
+        GameScore playerTwoScore = GameScore.THERTY;
         // when
         Optional<Player> optionalWinner = gameWinner(playerOneScore, playerTwoScore);
         // then
