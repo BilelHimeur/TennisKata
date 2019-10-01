@@ -74,4 +74,12 @@ public class GameScoreService {
         return Player.PLAYER_ONE.equals(playerWhoScored) ? new ScoreHolder(score.getGameScoreValue(), playerTwoScore.getGameScoreValue()) :
                 new ScoreHolder(playerOneScore.getGameScoreValue(), score.getGameScoreValue());
     }
+
+    public static ScoreHolder tiebreakScore(int playerOneScore,int playerTwoScore, Player playerWhoScored){
+        if (Player.PLAYER_ONE.equals(playerWhoScored))
+            playerOneScore++;
+        else
+            playerTwoScore++;
+        return new ScoreHolder(playerOneScore, playerTwoScore);
+    }
 }
