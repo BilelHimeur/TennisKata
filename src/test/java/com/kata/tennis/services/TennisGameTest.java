@@ -84,4 +84,16 @@ public class TennisGameTest {
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(2, 1)));
     }
+
+    @Test
+    public void should_update_match_status_to_wining_player() {
+        // given
+        TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
+        tennisGame.setCurrentMatchScore( new ScoreHolder(3, 1));
+        Player playerWhoScored = Player.PLAYER_ONE;
+        // then
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // when
+        assertThat(tennisGameNextStatus.getMatchStatus(), is(MatchStatus.PLAYER_ONE_WINS));
+    }
 }
