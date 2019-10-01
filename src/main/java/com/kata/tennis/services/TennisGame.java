@@ -64,6 +64,10 @@ public class TennisGame {
             }
 
         }
+        MatchScoreService.matchWinner(
+                tennisGameCurrentStatus.getCurrentMatchScore().playerOneScore,
+                tennisGameCurrentStatus.getCurrentMatchScore().getPlayerTwoScore()
+        ).ifPresent(tennisGameCurrentStatus::setMatchStatus);
         return tennisGameCurrentStatus;
     }
 
