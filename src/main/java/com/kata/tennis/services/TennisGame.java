@@ -22,22 +22,32 @@ public class TennisGame {
     public MatchStatus matchStatus = MatchStatus.IN_PROGRESS;
 
     public static TennisGame score(Player playerWhoScored, TennisGame tennisGameCurrentStatus) {
-        GameScore playerOneGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore());
-        GameScore playerTwoGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore());
-        if (GameScoreService.gameWinner(playerOneGameScore, playerTwoGameScore, playerWhoScored).isPresent()) {
-            tennisGameCurrentStatus.setCurrentGameScore(new ScoreHolder(0, 0));
-            tennisGameCurrentStatus.setCurrentSetScore(SetScoreService.score(
-                    tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(),
-                    tennisGameCurrentStatus.getCurrentSetScore().getPlayerTwoScore(), playerWhoScored)
-            );
+        boolean isSetTieBreak = SetScoreService.isSetScoreTieBreak(tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(),
+                tennisGameCurrentStatus.getCurrentSetScore().getPlayerTwoScore());
+        if (!isSetTieBreak) {
+            GameScore playerOneGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore());
+            GameScore playerTwoGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore());
+            if (GameScoreService.gameWinner(playerOneGameScore, playerTwoGameScore, playerWhoScored).isPresent()) {
+                tennisGameCurrentStatus.setCurrentGameScore(new ScoreHolder(0, 0));
+                tennisGameCurrentStatus.setCurrentSetScore(SetScoreService.score(
+                        tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(),
+                        tennisGameCurrentStatus.getCurrentSetScore().getPlayerTwoScore(), playerWhoScored)
+                );
+            } else {
+                ScoreHolder scoreHolder = GameScoreService.score(playerOneGameScore, playerTwoGameScore, playerWhoScored);
+                tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
+            }
+            if (SetScoreService.setWinner(tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(), tennisGameCurrentStatus.getCurrentSetScore().getPlayerTwoScore()).isPresent()) {
+                tennisGameCurrentStatus.setCurrentMatchScore(MatchScoreService.
+                        score(tennisGameCurrentStatus.getCurrentMatchScore().getPlayerOneScore(),
+                                tennisGameCurrentStatus.getCurrentMatchScore().getPlayerTwoScore(), playerWhoScored));
+            }
         } else {
-            ScoreHolder scoreHolder = GameScoreService.score(playerOneGameScore, playerTwoGameScore, playerWhoScored);
-            tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
-        }
-        if (SetScoreService.setWinner(tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(), tennisGameCurrentStatus.getCurrentSetScore().getPlayerTwoScore()).isPresent()) {
-            tennisGameCurrentStatus.setCurrentMatchScore(MatchScoreService.
-                    score(tennisGameCurrentStatus.getCurrentMatchScore().getPlayerOneScore(),
-                    tennisGameCurrentStatus.getCurrentMatchScore().getPlayerTwoScore(), playerWhoScored));
+                ScoreHolder scoreHolder = GameScoreService.tiebreakScore(
+                        tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore(),
+                        tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore(),
+                        playerWhoScored);
+                tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
         }
         return tennisGameCurrentStatus;
     }
