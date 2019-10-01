@@ -52,6 +52,26 @@ public class GameScoreService {
     }
 
     public static ScoreHolder score(GameScore playerOneScore, GameScore playerTwoScore, Player playerWhoScored) {
-        return null;
+        GameScore score;
+        if (Player.PLAYER_ONE.equals(playerWhoScored))
+            score = playerOneScore;
+        else
+            score = playerTwoScore;
+        switch (score.getGameScoreValue()) {
+            case 0:
+                score = GameScore.FIFTEEN;
+                break;
+            case 15:
+                score = GameScore.THERTY;
+                break;
+            case 30:
+                score = GameScore.FORTY;
+                break;
+            case 50:
+                score = GameScore.ADVANTEGE;
+                break;
+        }
+        return Player.PLAYER_ONE.equals(playerWhoScored) ? new ScoreHolder(score.getGameScoreValue(), playerTwoScore.getGameScoreValue()) :
+                new ScoreHolder(playerOneScore.getGameScoreValue(), score.getGameScoreValue());
     }
 }
