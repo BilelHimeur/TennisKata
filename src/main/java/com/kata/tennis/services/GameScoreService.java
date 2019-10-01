@@ -2,6 +2,7 @@ package com.kata.tennis.services;
 
 import com.kata.tennis.model.GameScore;
 import com.kata.tennis.model.Player;
+import com.kata.tennis.model.ScoreHolder;
 
 import java.util.Optional;
 
@@ -48,5 +49,9 @@ public class GameScoreService {
                 return Optional.of(Player.PLAYER_TWO);
             return Optional.empty();
         }
+    }
+
+    public static ScoreHolder score(GameScore playerOneScore, GameScore playerTwoScore, Player playerWhoScored) {
+        return null;
     }
 }

@@ -2,6 +2,7 @@ package com.kata.tennis.services;
 
 import com.kata.tennis.model.GameScore;
 import com.kata.tennis.model.Player;
+import com.kata.tennis.model.ScoreHolder;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -93,5 +94,17 @@ public class GameScoreServiceTest {
         // then
         assertThat(optionalWinner.isPresent(), is(true));
         assertThat(optionalWinner.get(), equalTo(Winner));
+    }
+
+    @Test
+    public void should_return_new_score_for_player_who_scored() {
+        // given
+        GameScore playerOneScore = GameScore.ZERO;
+        GameScore playerTwoScore = GameScore.FIFTEEN;
+        Player playerWhoScored = Player.PLAYER_TWO;
+        // when
+        ScoreHolder scoreHolder = score(playerOneScore, playerTwoScore, playerWhoScored);
+        // then
+        assertThat(scoreHolder, is(new ScoreHolder(0,30)));
     }
 }
