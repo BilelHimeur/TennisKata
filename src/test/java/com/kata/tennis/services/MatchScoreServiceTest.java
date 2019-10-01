@@ -1,11 +1,14 @@
 package com.kata.tennis.services;
 
 import com.kata.tennis.model.MatchStatus;
+import com.kata.tennis.model.Player;
+import com.kata.tennis.model.ScoreHolder;
 import org.junit.Test;
 
 import java.util.Optional;
 
 import static com.kata.tennis.services.MatchScoreService.matchWinner;
+import static com.kata.tennis.services.MatchScoreService.score;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -33,5 +36,17 @@ public class MatchScoreServiceTest {
         // then
         assertThat(maybeWinner.isPresent(), is(true));
         assertThat(maybeWinner.get(), is(winner));
+    }
+
+    @Test
+    public void should_return_new_match_score() {
+        // given
+        int playerOneMatchScore = 1;
+        int playerTwoMatchScore = 1;
+        Player winner = Player.PLAYER_ONE;
+        // when
+        ScoreHolder scoreHolder = score(playerOneMatchScore, playerTwoMatchScore, winner);
+        // then
+        assertThat(scoreHolder, is(new ScoreHolder(playerOneMatchScore + 1, playerTwoMatchScore)));
     }
 }

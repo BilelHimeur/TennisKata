@@ -1,6 +1,8 @@
 package com.kata.tennis.services;
 
 import com.kata.tennis.model.MatchStatus;
+import com.kata.tennis.model.Player;
+import com.kata.tennis.model.ScoreHolder;
 
 import java.util.Optional;
 
@@ -14,5 +16,9 @@ public class MatchScoreService {
                 return Optional.of(MatchStatus.PLAYER_ONE_WINS);
             return Optional.of(MatchStatus.PLAYER_TWO_WINS);
         }
+    }
+
+    public static ScoreHolder score(int currentPlayerOneMatchScore, int currentPlayerTwoMatchScore, Player playerWhoScored) {
+        return null;
     }
 }
