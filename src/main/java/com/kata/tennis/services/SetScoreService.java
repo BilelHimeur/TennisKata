@@ -1,6 +1,7 @@
 package com.kata.tennis.services;
 
 import com.kata.tennis.model.Player;
+import com.kata.tennis.model.ScoreHolder;
 
 import java.util.Optional;
 
@@ -32,4 +33,8 @@ public class SetScoreService {
             return true;
         return false;
     }
+
+    public static ScoreHolder score(int currentPlayerOneSetScore, int currentPlayerTwoSetScore, Player playerWhoScored) {
+        return null;
     }
+}

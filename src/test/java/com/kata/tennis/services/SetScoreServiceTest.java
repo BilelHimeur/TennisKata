@@ -1,15 +1,14 @@
 package com.kata.tennis.services;
 
 import com.kata.tennis.model.Player;
+import com.kata.tennis.model.ScoreHolder;
 import org.junit.Test;
 
 import java.util.Optional;
 
-import static com.kata.tennis.services.SetScoreService.isSetScoreTieBreak;
+import static com.kata.tennis.services.SetScoreService.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-
-import static com.kata.tennis.services.SetScoreService.setWinner;
 
 public class SetScoreServiceTest {
 
@@ -59,5 +58,17 @@ public class SetScoreServiceTest {
         // then
         assertThat(maybeWinner.isPresent(), is(true));
         assertThat(maybeWinner.get(), is(winner));
+    }
+
+    @Test
+    public void should_return_new_set_score() {
+        // given
+        int playerOneTieBreakScore = 2;
+        int playerTwoTieBreakScore = 4;
+        Player winner = Player.PLAYER_TWO;
+        // when
+        ScoreHolder scoreHolder = score(playerOneTieBreakScore, playerTwoTieBreakScore, winner);
+        // then
+        assertThat(scoreHolder, is(new ScoreHolder(playerOneTieBreakScore, playerTwoTieBreakScore + 1)));
     }
 }
