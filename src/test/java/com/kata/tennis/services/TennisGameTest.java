@@ -55,4 +55,17 @@ public class TennisGameTest {
         //assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(1, 0)));
     }
+
+    @Test
+    public void should_update_game_score_when_there_is_tie_break() {
+        // given
+        TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
+        tennisGame.setCurrentGameScore(new ScoreHolder(4, 3));
+        tennisGame.setCurrentSetScore( new ScoreHolder(6, 6));
+        Player playerWhoScored = Player.PLAYER_ONE;
+        // then
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // when
+        assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(5, 3)));
+    }
 }
