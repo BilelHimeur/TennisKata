@@ -35,6 +35,10 @@ public class SetScoreService {
     }
 
     public static ScoreHolder score(int currentPlayerOneSetScore, int currentPlayerTwoSetScore, Player playerWhoScored) {
-        return null;
+        if (Player.PLAYER_ONE.equals(playerWhoScored))
+            currentPlayerOneSetScore++;
+        else
+            currentPlayerTwoSetScore++;
+        return new ScoreHolder(currentPlayerOneSetScore, currentPlayerTwoSetScore);
     }
 }
