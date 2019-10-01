@@ -19,6 +19,10 @@ public class MatchScoreService {
     }
 
     public static ScoreHolder score(int currentPlayerOneMatchScore, int currentPlayerTwoMatchScore, Player playerWhoScored) {
-        return null;
+        if (Player.PLAYER_ONE.equals(playerWhoScored))
+            currentPlayerOneMatchScore ++;
+        else
+            currentPlayerTwoMatchScore ++;
+        return new ScoreHolder(currentPlayerOneMatchScore, currentPlayerTwoMatchScore);
     }
 }
