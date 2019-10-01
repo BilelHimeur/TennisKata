@@ -1,5 +1,6 @@
 package com.kata.tennis.model;
 
+import com.kata.tennis.exceptions.UnsupportedGameScoreValue;
 import lombok.Getter;
 
 @Getter
@@ -15,5 +16,14 @@ public enum GameScore {
 
     GameScore(int gameScoreValue) {
         this.gameScoreValue = gameScoreValue;
+    }
+
+    public static GameScore getByValue(int value) {
+        for (GameScore gameScore: GameScore.values()) {
+            if (value == gameScore.getGameScoreValue()) {
+                return gameScore;
+            }
+        }
+        throw new UnsupportedGameScoreValue();
     }
 }

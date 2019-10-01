@@ -1,5 +1,6 @@
 package com.kata.tennis.services;
 
+import com.kata.tennis.model.GameScore;
 import com.kata.tennis.model.MatchStatus;
 import com.kata.tennis.model.Player;
 import com.kata.tennis.model.ScoreHolder;
@@ -16,10 +17,14 @@ public class TennisGame {
     public final String playerOneName;
     public final String playerTwoName;
     public List<ScoreHolder> setsScore = new ArrayList<>();
-    public ScoreHolder currentGameScore = new ScoreHolder(0,0);
+    public ScoreHolder currentGameScore = new ScoreHolder(0, 0);
     public MatchStatus matchStatus = MatchStatus.IN_PROGRESS;
 
     public static TennisGame score(Player playerWhoScored, TennisGame tennisGameCurrentStatus) {
-        return null;
+        GameScore playerOneGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore());
+        GameScore playerTwoGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore());
+        ScoreHolder scoreHolder = GameScoreService.score(playerOneGameScore, playerTwoGameScore, playerWhoScored);
+        tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
+        return tennisGameCurrentStatus;
     }
 }
