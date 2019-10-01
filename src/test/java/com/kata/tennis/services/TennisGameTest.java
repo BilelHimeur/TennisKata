@@ -39,4 +39,20 @@ public class TennisGameTest {
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(1, 0)));
     }
+
+    @Test
+    public void should_update_match_score_when_there_is_set_winner() {
+        // given
+        TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
+        tennisGame.setCurrentGameScore(new ScoreHolder(GameScore.ADVANTEGE.getGameScoreValue(), GameScore.FIFTEEN.getGameScoreValue()));
+        tennisGame.setCurrentSetScore( new ScoreHolder(5, 3));
+        tennisGame.setCurrentMatchScore( new ScoreHolder(0, 0));
+        Player playerWhoScored = Player.PLAYER_ONE;
+        // then
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // when
+        assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
+        //assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
+        assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(1, 0)));
+    }
 }
