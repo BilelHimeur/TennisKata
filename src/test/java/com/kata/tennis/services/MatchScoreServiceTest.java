@@ -22,7 +22,8 @@ public class MatchScoreServiceTest {
         // when
         Optional maybeWinner = matchWinner(playerOneSetScore, playerTwoSetScore);
         // then
-        assertThat(maybeWinner.isPresent(), is(false));
+        assertThat(maybeWinner.isPresent(), is(true));
+        assertThat(maybeWinner.get(), is(MatchStatus.IN_PROGRESS));
     }
 
     @Test

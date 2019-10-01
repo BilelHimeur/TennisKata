@@ -19,9 +19,9 @@ public class TennisGameTest {
         // given
         TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
         Player playerWhoScored = Player.PLAYER_ONE;
-        // then
-        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // then
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(15, 0)));
         assertThat(tennisGameNextStatus.getMatchStatus(), is(MatchStatus.IN_PROGRESS));
     }
@@ -33,9 +33,9 @@ public class TennisGameTest {
         tennisGame.setCurrentGameScore(new ScoreHolder(GameScore.ADVANTEGE.getGameScoreValue(), GameScore.FIFTEEN.getGameScoreValue()));
         tennisGame.setCurrentSetScore( new ScoreHolder(0, 0));
         Player playerWhoScored = Player.PLAYER_ONE;
-        // then
-        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // then
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(1, 0)));
     }
@@ -48,9 +48,9 @@ public class TennisGameTest {
         tennisGame.setCurrentSetScore( new ScoreHolder(5, 3));
         tennisGame.setCurrentMatchScore( new ScoreHolder(0, 0));
         Player playerWhoScored = Player.PLAYER_ONE;
-        // then
-        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // then
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(1, 0)));
@@ -63,9 +63,9 @@ public class TennisGameTest {
         tennisGame.setCurrentGameScore(new ScoreHolder(4, 3));
         tennisGame.setCurrentSetScore( new ScoreHolder(6, 6));
         Player playerWhoScored = Player.PLAYER_ONE;
-        // then
-        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // then
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(5, 3)));
     }
 
@@ -77,9 +77,9 @@ public class TennisGameTest {
         tennisGame.setCurrentSetScore( new ScoreHolder(6, 6));
         tennisGame.setCurrentMatchScore( new ScoreHolder(1, 1));
         Player playerWhoScored = Player.PLAYER_ONE;
-        // then
-        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // then
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentMatchScore(), is(new ScoreHolder(2, 1)));
@@ -91,9 +91,9 @@ public class TennisGameTest {
         TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
         tennisGame.setCurrentMatchScore( new ScoreHolder(3, 1));
         Player playerWhoScored = Player.PLAYER_ONE;
-        // then
-        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
         // when
+        TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
+        // then
         assertThat(tennisGameNextStatus.getMatchStatus(), is(MatchStatus.PLAYER_ONE_WINS));
     }
 }
