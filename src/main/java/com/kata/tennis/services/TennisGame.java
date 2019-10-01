@@ -23,8 +23,16 @@ public class TennisGame {
     public static TennisGame score(Player playerWhoScored, TennisGame tennisGameCurrentStatus) {
         GameScore playerOneGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerOneScore());
         GameScore playerTwoGameScore = GameScore.getByValue(tennisGameCurrentStatus.getCurrentGameScore().getPlayerTwoScore());
-        ScoreHolder scoreHolder = GameScoreService.score(playerOneGameScore, playerTwoGameScore, playerWhoScored);
-        tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
+        if (GameScoreService.gameWinner(playerOneGameScore, playerTwoGameScore, playerWhoScored).isPresent()) {
+            tennisGameCurrentStatus.setCurrentGameScore(new ScoreHolder(0,0));
+            tennisGameCurrentStatus.setCurrentSetScore(SetScoreService.score(
+                    tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(),
+                    tennisGameCurrentStatus.getCurrentSetScore().getPlayerOneScore(), playerWhoScored)
+            );
+        } else {
+            ScoreHolder scoreHolder = GameScoreService.score(playerOneGameScore, playerTwoGameScore, playerWhoScored);
+            tennisGameCurrentStatus.setCurrentGameScore(scoreHolder);
+        }
         return tennisGameCurrentStatus;
     }
 
@@ -34,7 +42,7 @@ public class TennisGame {
         return new ScoreHolder(0, 0);
     }
 
-    public void setCurrentSetScore(ScoreHolder currentSetScore){
+    public void setCurrentSetScore(ScoreHolder currentSetScore) {
         this.setsScore.add(currentSetScore);
     }
 }

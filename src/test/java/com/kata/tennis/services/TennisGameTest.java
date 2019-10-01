@@ -1,5 +1,6 @@
 package com.kata.tennis.services;
 
+import com.kata.tennis.model.GameScore;
 import com.kata.tennis.model.MatchStatus;
 import com.kata.tennis.model.Player;
 import com.kata.tennis.model.ScoreHolder;
@@ -29,12 +30,11 @@ public class TennisGameTest {
     public void should_update_set_score_when_there_is_game_winner() {
         // given
         TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
+        tennisGame.setCurrentGameScore(new ScoreHolder(GameScore.ADVANTEGE.getGameScoreValue(), GameScore.FIFTEEN.getGameScoreValue()));
+        tennisGame.setCurrentSetScore( new ScoreHolder(0, 0));
         Player playerWhoScored = Player.PLAYER_ONE;
         // then
         TennisGame tennisGameNextStatus = score(playerWhoScored, tennisGame);
-        tennisGameNextStatus.setCurrentGameScore(new ScoreHolder(40, 15));
-        ScoreHolder currentSetScore = new ScoreHolder(0, 0);
-        tennisGameNextStatus.setCurrentSetScore(currentSetScore);
         // when
         assertThat(tennisGameNextStatus.getCurrentGameScore(), is(new ScoreHolder(0, 0)));
         assertThat(tennisGameNextStatus.getCurrentSetScore(), is(new ScoreHolder(1, 0)));
