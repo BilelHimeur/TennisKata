@@ -14,7 +14,7 @@ public class TennisGameTest {
     private final static String PLAYER_TWO_NAME = "player 2";
 
     @Test
-    public void Should_update_only_current_game_score() {
+    public void should_update_only_current_game_score() {
         // given
         TennisGame tennisGame = new TennisGame(PLAYER_ONE_NAME, PLAYER_TWO_NAME);
         Player playerWhoScored = Player.PLAYER_ONE;
